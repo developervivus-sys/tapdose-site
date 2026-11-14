@@ -11,7 +11,8 @@ Serves the universal link / App Link verification files and the pages for NFC st
    - EAS upload/build key: `eas credentials -p android`
    - Play App Signing key: Play Console > App signing
    - Debug keystore: `keytool -list -v -keystore android/app/debug.keystore -alias androiddebugkey -storepass android -keypass android`
-5. Verify:
+5. Once the store listings exist, replace the App Store and Google Play links in `404.html` with the real listing URLs.
+6. Verify:
    - `curl -sI https://med.techviv.us/.well-known/apple-app-site-association` (expect 200, no redirect; note the Content-Type)
    - `curl -s https://app-site-association.cdn-apple.com/a/v1/med.techviv.us` (Apple's cached copy, within about 24 h)
    - `adb shell pm get-app-links us.techviv.tapdose` (expect `verified`)
