@@ -25,3 +25,5 @@ jobs:
     uses: developervivus-sys/vivus-ai-code-review/.github/workflows/ai-review-on-demand.yml@v1
     secrets:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    with:
+      profile: web   # mobile | backend | library | web
