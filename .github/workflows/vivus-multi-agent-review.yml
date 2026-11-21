@@ -1,0 +1,21 @@
+name: vivus-multi-agent-review
+
+# Multi-agent review for tapdose-site: comment "/vivus-review" on a PR.
+# Override the agents by adding *.md files under .claude/plugins/vivus-review/.
+# Provided by: https://github.com/developervivus-sys/vivus-ai-code-review (pinned to v1)
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  review:
+    uses: developervivus-sys/vivus-ai-code-review/.github/workflows/ai-review-multi-agent.yml@v1
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

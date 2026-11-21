@@ -1,0 +1,29 @@
+name: vivus-ai-code-review
+
+# Automatic Claude review for tapdose-site.
+# Who gets reviewed: .github/ai-review/vivus-reviewers.txt  (delete the file to review everyone)
+# What it looks for:  .github/ai-review/vivus-review-prompt.md (delete the file to use the org default)
+# Provided by: https://github.com/developervivus-sys/vivus-ai-code-review (pinned to v1)
+
+on:
+  pull_request:
+    types:
+      - opened
+      - ready_for_review
+      # - synchronize   # uncomment for per-push reviews (costs Actions minutes and API spend)
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  review:
+    uses: developervivus-sys/vivus-ai-code-review/.github/workflows/ai-review.yml@v1
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    # with:
+    #   max_turns: 60
+    #   model: claude-opus-5-5
+    #   submit_verdict: false
