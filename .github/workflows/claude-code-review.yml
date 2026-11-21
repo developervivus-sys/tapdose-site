@@ -1,0 +1,27 @@
+name: claude-code-review
+
+# On-demand Claude for tapdose-site: comment "@claude <request>" on a PR or issue,
+# or add the "claude-code" label to an issue.
+# Provided by: https://github.com/developervivus-sys/vivus-ai-code-review (pinned to v1)
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  claude:
+    uses: developervivus-sys/vivus-ai-code-review/.github/workflows/ai-review-on-demand.yml@v1
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
